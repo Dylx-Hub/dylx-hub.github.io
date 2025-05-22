@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en" class="dark">
+<!DOCTYPE html>
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,7 +18,9 @@
   <header class="p-6 text-center border-b border-gray-700">
     <h1 class="text-3xl font-bold">Willkommen auf meiner Seite</h1>
     <p class="text-gray-400">Ein zentraler Ort für meine Profile und Projekte</p>
-  </header>  <main class="p-6 max-w-4xl mx-auto">
+  </header>
+
+  <main class="p-6 max-w-4xl mx-auto">
     <section class="mb-10">
       <h2 class="text-2xl font-semibold mb-4">Meine Profile</h2>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -34,23 +37,52 @@
           <p class="text-sm text-gray-400">Zu meiner Musik</p>
         </a>
       </div>
-    </section><section class="mb-10">
-  <h2 class="text-2xl font-semibold mb-4">Live-Daten (Platzhalter)</h2>
-  <div class="bg-gray-800 p-4 rounded-xl text-sm text-gray-300">
-    <p>Spotify: Aktueller Song wird hier erscheinen</p>
-    <p>Steam: Aktuelles Spiel oder Spielzeit</p>
-  </div>
-</section>
+    </section>
 
-<section>
-  <h2 class="text-2xl font-semibold mb-4">Portfolio (demnächst)</h2>
-  <div class="bg-gray-800 p-4 rounded-xl text-gray-400">
-    Noch keine Projekte eingetragen. Bald verfügbar.
-  </div>
-</section>
+    <section class="mb-10">
+      <h2 class="text-2xl font-semibold mb-4">Spotify Login</h2>
+      <button id="spotify-login" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-xl transition">
+        Mit Spotify verbinden
+      </button>
+      <div id="spotify-token" class="mt-4 text-sm text-gray-300"></div>
+    </section>
 
-  </main>  <footer class="p-6 text-center border-t border-gray-700 text-sm text-gray-500">
+    <section class="mb-10">
+      <h2 class="text-2xl font-semibold mb-4">Live-Daten (Platzhalter)</h2>
+      <div class="bg-gray-800 p-4 rounded-xl text-sm text-gray-300">
+        <p>Spotify: Aktueller Song wird hier erscheinen</p>
+        <p>Steam: Aktuelles Spiel oder Spielzeit</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-semibold mb-4">Portfolio (demnächst)</h2>
+      <div class="bg-gray-800 p-4 rounded-xl text-gray-400">
+        Noch keine Projekte eingetragen. Bald verfügbar.
+      </div>
+    </section>
+  </main>
+
+  <footer class="p-6 text-center border-t border-gray-700 text-sm text-gray-500">
     &copy; 2025 – Dein Name. Alle Rechte vorbehalten.
   </footer>
+
+  <script>
+    // Login Button Weiterleitung
+    document.getElementById("spotify-login").addEventListener("click", () => {
+      window.location.href = "https://spotify-server-2q2a.onrender.com/api/login";
+    });
+
+    // Access Token aus URL lesen
+    const hash = window.location.hash;
+    if (hash) {
+      const params = new URLSearchParams(hash.substring(1));
+      const accessToken = params.get("access_token");
+      if (accessToken) {
+        document.getElementById("spotify-token").textContent = "Access Token erhalten: " + accessToken;
+        // Hier kannst du in Zukunft Spotify-API-Aufrufe machen
+      }
+    }
+  </script>
 </body>
 </html>
