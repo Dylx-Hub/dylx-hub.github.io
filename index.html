@@ -51,7 +51,7 @@ index.html:
     <section class="mb-10">
       <h2 class="text-2xl font-semibold mb-4">Live-Daten (Platzhalter)</h2>
       <div class="bg-gray-800 p-4 rounded-xl text-sm text-gray-300">
-        <p>Spotify: Aktueller Song wird hier erscheinen</p>
+        <div id="spotify-nowplaying">Lade aktuell gespielten Song...</div>
         <p>Steam: Aktuelles Spiel oder Spielzeit</p>
       </div>
     </section>
@@ -85,5 +85,36 @@ index.html:
       }
     }
   </script>
+  <script>
+  function getTokenFromUrl() {
+    const hash = window.location.hash.substring(1);
+    const params = new URLSearchParams(hash);
+    return params.get("access_token");
+  }
+
+  async function loadNowPlaying() {
+    const token = getTokenFromUrl();
+    if (!token) return;
+
+    const res = await fetch(`https://spotify-server-2q2a.onrender.com/api/nowplaying?access_token=${token}`);
+    if (!res.ok) return;
+
+    const song = await res.json();
+    if (!song.title) return;
+
+    const container = document.getElementById("spotify-nowplaying");
+    container.innerHTML = `
+      <a href="${song.url}" target="_blank" class="block p-4 bg-gray-800 rounded-xl hover:bg-gray-700 transition">
+        <img src="${song.cover}" alt="Album Cover" class="w-16 h-16 mb-2 rounded">
+        <div>
+          <p class="font-semibold">${song.title}</p>
+          <p class="text-gray-400 text-sm">${song.artist} – ${song.album}</p>
+        </div>
+      </a>
+    `;
+  }
+
+  window.onload = loadNowPlaying;
+</script>
 </body>
 </html>
