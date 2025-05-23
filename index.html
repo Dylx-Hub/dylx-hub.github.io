@@ -1,117 +1,91 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DYLX</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <style>
+      body {
+        background-color: #0f0f11;
+        font-family: 'Inter', sans-serif;
+        color: white;
+      }
+      .card {
+        background-color: #1c1c1e;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      }
+      .section-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+        font-weight: 600;
+        font-size: 1.25rem;
+      }
+      .section-header img {
+        width: 24px;
+        height: 24px;
+        margin-right: 0.5rem;
+      }
+      .text-accent {
+        color: #00FFAB;
+      }
+      a.text-accent:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="flex justify-between items-center p-6 max-w-5xl mx-auto">
+      <div class="text-3xl font-bold text-accent">DY.X</div>
+      <nav class="space-x-6 text-gray-300 text-sm">
+        <a href="#spotify" class="hover:text-white">Spotify</a>
+        <a href="#steam" class="hover:text-white">Steam</a>
+        <a href="#discord" class="hover:text-white">Discord</a>
+      </nav>
+    </header>
 
-<html lang=“de“ class=“dark“> 
-  <head> 
-    <meta charset=“UTF-8“ /> 
-    <meta name=“viewport“ content=“width=device-width, initial-scale=1.0“ /> 
-    <title>Dyleox Dashboard</title> 
-    <link href=https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css rel=“stylesheet“ /> 
-    <style> 
-      Html { 
-        Scroll-behavior: smooth; 
-      } 
-      @keyframes fadeInUp { 
-        0% { 
-          Opacity: 0; 
-          Transform: translateY(20px); 
-        } 
-        100% { 
-          Opacity: 1; 
-          Transform: translateY(0); 
-        } 
-      } 
-      .fade-in-up { 
-        Animation: fadeInUp 0.8s ease-out forwards; 
-        Opacity: 0; 
-      } 
-      .fade-delay-1 { animation-delay: 0.2s; } 
-      .fade-delay-2 { animation-delay: 0.4s; } 
-      .fade-delay-3 { animation-delay: 0.6s; } 
-    </style> 
-    <script> 
-      If ( 
-        localStorage.getItem(„theme“) === „dark“ || 
-        !(„theme“ in localStorage) 
-      ) { 
-        Document.documentElement.classList.add(„dark“); 
-      } else { 
-        Document.documentElement.classList.remove(„dark“); 
-      } 
-      Async function loadNowPlaying() { 
-        Const hash = window.location.hash; 
-        If (hash.includes(„access_token=“)) { 
-          Const token = hash.split(„access_token=“)[1].split(„&“)[0]; 
-          Const res = await fetch(`https://spotify-server-2q2a.onrender.com/api/nowplaying?access_token=${token}`); 
-          Const data = await res.json(); 
-          Document.getElementById(„now-playing“).innerHTML = ` 
-            <div class=“flex items-center space-x-4 animate-fade-in“> 
-              <img src=“${data.albumImageUrl}“ alt=“Cover“ class=“w-16 h-16 rounded-lg shadow“ /> 
-              <div> 
-                <p class=“font-semibold“>${data.title}</p> 
-                <p class=“text-gray-400 text-sm“>${data.artist}</p> 
-              </div> 
-            </div>`; 
-        } 
-      } 
-      Window.onload = () => { 
-        loadNowPlaying(); 
-        // Animate sections on load 
-        Const sections = document.querySelectorAll(‚.fade-in-up‘); 
-        Sections.forEach((el, i) => { 
-          El.style.animationDelay = `${i * 0.15 + 0.2}s`; 
-          El.classList.add(‚visible‘); 
-        }); 
-      }; 
-    </script> 
-  </head> 
-  <body class=“bg-black text-white font-sans“> 
-    <header class=“bg-gradient-to-br from-gray-900 via-black to-gray-900 p-8 text-center fade-in-up“> 
-      <h1 class=“text-4xl md:text-5xl font-bold tracking-tight mb-2“>Hi, ich bin Dyleox</h1> 
-      <p class=“text-gray-400 text-lg“>Musikliebhaber. Gamer. Kreativer Entwickler.</p> 
-    </header> 
-    <main class=“max-w-4xl mx-auto p-6 space-y-16“> 
-      <!—Spotify à 
-      <section class=“fade-in-up fade-delay-1“> 
-        <h2 class=“text-2xl font-bold mb-4“>Jetzt auf Spotify</h2> 
-        <div id=“now-playing“ class=“bg-gray-900 p-4 rounded-xl shadow text-sm text-gray-300 transition-all“> 
-          <p>Lade aktuelle Wiedergabe…</p> 
-        </div> 
-      </section> 
-      <!—Discord à 
-      <section class=“fade-in-up fade-delay-2“> 
-        <h2 class=“text-2xl font-bold mb-4“>Discord Status</h2> 
-        <div class=“bg-gray-900 p-4 rounded-xl shadow text-sm text-gray-300“> 
-          <p class=“text-gray-500“>Bald verfügbar: Live-Status über Discord API.</p> 
-        </div> 
-      </section> 
-      <!—Steam à 
-      <section class=“fade-in-up fade-delay-3“> 
-        <h2 class=“text-2xl font-bold mb-4“>Steam Aktivität</h2> 
-        <div class=“bg-gray-900 p-4 rounded-xl shadow text-sm text-gray-300“> 
-          <p class=“text-gray-500“>Bald verfügbar: Letztes gespieltes Spiel & Spielzeit.</p> 
-        </div> 
-      </section> 
-      <!—Social Links à 
-      <section class=“fade-in-up fade-delay-3“> 
-        <h2 class=“text-2xl font-bold mb-4“>Socials & Profile</h2> 
-        <div class=“grid grid-cols-1 sm:grid-cols-3 gap-4“> 
-          <a href=https://steamcommunity.com/id/Dyleox target=“_blank“ class=“bg-gray-800 hover:bg-gray-700 p-4 rounded-xl text-center shadow transition-all duration-300 transform hover:scale-105“> 
-            <h3 class=“font-semibold text-lg“>Steam</h3> 
-            <p class=“text-gray-400 text-sm“>Profil ansehen</p> 
-          </a> 
-          <a href=https://discord.com/users/217027420644048897 target=“_blank“ class=“bg-gray-800 hover:bg-gray-700 p-4 rounded-xl text-center shadow transition-all duration-300 transform hover:scale-105“> 
-            <h3 class=“font-semibold text-lg“>Discord</h3> 
-            <p class=“text-gray-400 text-sm“>Nachricht senden</p> 
-          </a> 
-          <a href=https://open.spotify.com/user/dyleox target=“_blank“ class=“bg-green-600 hover:bg-green-500 p-4 rounded-xl text-center shadow transition-all duration-300 transform hover:scale-105“> 
-            <h3 class=“font-semibold text-lg“>Spotify</h3> 
-            <p class=“text-sm text-black“>Zur Playlist</p> 
-          </a> 
-        </div> 
-      </section> 
-    </main> 
-    <footer class=“p-6 text-center text-sm text-gray-500 border-t border-gray-800 fade-in-up fade-delay-3“> 
-      &copy; 2025 Dyleox. Alle Rechte vorbehalten. 
-    </footer> 
-  </body> 
-</html> 
+    <main class="max-w-3xl mx-auto px-4">
+      <section class="text-center mt-12 mb-16">
+        <h1 class="text-5xl font-extrabold">DYLX</h1>
+        <p class="text-accent text-2xl mt-2">dylx.ly</p>
+      </section>
+
+      <!-- Spotify -->
+      <section id="spotify" class="card">
+        <div class="section-header">
+          <img src="https://cdn-icons-png.flaticon.com/512/174/174872.png" alt="Spotify" />
+          <h2>Listening Now</h2>
+        </div>
+        <div id="spotify-data" class="text-gray-300 text-sm">Lade Daten...</div>
+      </section>
+
+      <!-- Steam -->
+      <section id="steam" class="card">
+        <div class="section-header">
+          <img src="https://cdn-icons-png.flaticon.com/512/5968/5968703.png" alt="Steam" />
+          <h2>Currently In-Game</h2>
+        </div>
+        <div id="steam-data" class="text-gray-300 text-sm">Lade Daten...</div>
+      </section>
+
+      <!-- Discord -->
+      <section id="discord" class="card">
+        <div class="section-header">
+          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord" />
+          <h2>Discord</h2>
+        </div>
+        <div id="discord-data" class="text-gray-300 text-sm">Lade Daten...</div>
+      </section>
+    </main>
+
+    <footer class="text-center text-gray-500 text-xs p-6 mt-16">
+      &copy; 2025 DYLX. All rights reserved.
+    </footer>
+
+    <script src="scripts.js"></script>
+  </body>
+</html>
