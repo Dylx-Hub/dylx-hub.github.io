@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,13 +7,40 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
     <style>
       body {
+        background-color: #0f0f11;
         font-family: 'Inter', sans-serif;
+        color: white;
+      }
+      .card {
+        background-color: #1c1c1e;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      }
+      .section-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+        font-weight: 600;
+        font-size: 1.25rem;
+      }
+      .section-header img {
+        width: 24px;
+        height: 24px;
+        margin-right: 0.5rem;
+      }
+      .text-accent {
+        color: #00FFAB;
+      }
+      a.text-accent:hover {
+        text-decoration: underline;
       }
     </style>
   </head>
-  <body class="bg-[#0f0f11] text-white">
+  <body>
     <header class="flex justify-between items-center p-6 max-w-5xl mx-auto">
-      <div class="text-3xl font-bold text-[#00FFAB]">DY.X</div>
+      <div class="text-3xl font-bold text-accent">DY.X</div>
       <nav class="space-x-6 text-gray-300 text-sm">
         <a href="#spotify" class="hover:text-white">Spotify</a>
         <a href="#steam" class="hover:text-white">Steam</a>
@@ -24,32 +51,32 @@
     <main class="max-w-3xl mx-auto px-4">
       <section class="text-center mt-12 mb-16">
         <h1 class="text-5xl font-extrabold">DYLX</h1>
-        <p class="text-[#00FFAB] text-2xl mt-2">dylx.ly</p>
+        <p class="text-accent text-2xl mt-2">dylx.ly</p>
       </section>
 
       <!-- Spotify -->
-      <section id="spotify" class="bg-[#1c1c1e] rounded-2xl p-6 mb-6 shadow">
-        <div class="flex items-center mb-4">
-          <img src="https://cdn-icons-png.flaticon.com/512/174/174872.png" alt="Spotify" class="w-6 h-6 mr-2" />
-          <h2 class="text-xl font-semibold">Listening Now</h2>
+      <section id="spotify" class="card">
+        <div class="section-header">
+          <img src="https://cdn-icons-png.flaticon.com/512/174/174872.png" alt="Spotify" />
+          <h2>Listening Now</h2>
         </div>
         <div id="spotify-data" class="text-gray-300 text-sm">Lade Daten...</div>
       </section>
 
       <!-- Steam -->
-      <section id="steam" class="bg-[#1c1c1e] rounded-2xl p-6 mb-6 shadow">
-        <div class="flex items-center mb-4">
-          <img src="https://cdn-icons-png.flaticon.com/512/5968/5968703.png" alt="Steam" class="w-6 h-6 mr-2" />
-          <h2 class="text-xl font-semibold">Currently In-Game</h2>
+      <section id="steam" class="card">
+        <div class="section-header">
+          <img src="https://cdn-icons-png.flaticon.com/512/5968/5968703.png" alt="Steam" />
+          <h2>Currently In-Game</h2>
         </div>
         <div id="steam-data" class="text-gray-300 text-sm">Lade Daten...</div>
       </section>
 
       <!-- Discord -->
-      <section id="discord" class="bg-[#1c1c1e] rounded-2xl p-6 mb-6 shadow">
-        <div class="flex items-center mb-4">
-          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord" class="w-6 h-6 mr-2" />
-          <h2 class="text-xl font-semibold">Discord</h2>
+      <section id="discord" class="card">
+        <div class="section-header">
+          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord" />
+          <h2>Discord</h2>
         </div>
         <div id="discord-data" class="text-gray-300 text-sm">Lade Daten...</div>
       </section>
